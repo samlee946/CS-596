@@ -25,6 +25,8 @@
 \renewcommand\algorithmiccomment[1]{%
 	\hfill\#\ \eqparbox{COMMENT}{#1}%
 }
+\newlist{subquestion}{enumerate}{1}
+\setlist[subquestion, 1]{label = \alph*)}
 
 \setlength\parindent{0pt}
 
@@ -43,7 +45,7 @@
 			1 & 0.5 \\
 			0 & 1 + \epsilon
 			\end{bmatrix}. \]} 
-		\begin{enumerate}
+		\begin{subquestion}
 			\item {Find the eigenvalues/eigenvectors of $ A $ assuming $ \epsilon \ne 0 $. Force your eigenvectors to have unit norm.} 
 			\begin{align*}
 				A - \lambda I &= \begin{bmatrix}
@@ -155,11 +157,11 @@
 				what do you conclude when $ \epsilon = 0 $?} \\
 			\\
 			When $ \epsilon $ is becoming closer to 0, the determinant of matrix $ T $ is becoming closer to 0. \\
-			Thus, when $ \epsilon = 0 $, matrix $ T $ will become non-invertable. Matrix $ A $ will become non-diagonalizable.
-		\end{enumerate}
+			Thus, when $ \epsilon = 0 $, matrix $ T $ will become non-invertible. Matrix $ A $ will become non-diagonalizable.
+		\end{subquestion}
 		
 		\item {Let A, B be two matrices of the same dimensions k × m.}
-		\begin{enumerate}
+		\begin{subquestion}
 			\item {With direct computation show that $ trace(AB^T ) = trace(B^T A) = trace(BA^T ) = trace(A^T B) $.} \\ \\
 			The $ i-th $ element in the diagonal of matrix $ AB^T $ is $ \sum\limits_{j = 1}^{m} a_{ij}b_{ij}$. Thus, $ trace(AB^T) = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} a_{ij}b_{ij} $. \\
 			The $ j-th $ element in the diagonal of matrix $ B^T A $ is $ \sum\limits_{i = 1}^{k} b_{ij}a_{ij}$. Thus, $ trace(B^T A) = \sum\limits_{j = 1}^{m}\sum\limits_{i = 1}^{k} b_{ij}a_{ij} = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} a_{ij}b_{ij}$. \\
@@ -188,7 +190,7 @@
 				prove that if matrix $ A $ of dimensions $ k \times k $ is diagonalizable then its trace is equal to the sum of its eigenvalues
 				(actually this is true even if the matrix is not diagonalizable).}
 			\begin{align*}
-				\shortintertext{Because matrix $ A $ is diagonalizable, then there exist a matrix $ T $ such that:}
+				\shortintertext{Because matrix $ A $ is diagonalizable, then there exists a matrix $ T $ such that:}
 				\Lambda &= T^{-1}AT \\
 				trace(\Lambda) &= trace(T^{-1}AT) = trace(A) \\
 				\shortintertext{Notice that $ \Lambda $ is a diagonal matrix with all eigenvalues of $ A $ as its diagonal entries. Thus, } 
@@ -201,6 +203,131 @@
 			
 			\item {Using again question d) what can you say about the coefficient $ c_{k-1} $ of the characteristic polynomial
 				$ \lambda^k + c_{k-1} \lambda^{k-1} + \dots + c_0 $ of $ A $. We recall that we already know that $ c_0 = (-1)^k \lambda_1 \cdots \lambda_k = (-1)^k \det(A) $.}
-		\end{enumerate}
+			\begin{align*}
+				\det(\lambda I - A) &= \lambda^k + c_{k-1} \lambda^{k-1} + \dots + c_0 \\
+				&= (\lambda - \lambda_1)(\lambda - \lambda_2) \dots (\lambda - \lambda_k) \\
+				&= \lambda^k - \lambda^{k-1}(\lambda_1 + \lambda_2 + \dots + \lambda_k) + \cdots \\
+				&= \lambda^k - trace(A)\lambda^{k-1} + \cdots 
+				\shortintertext{Therefore, }
+				c_{k-1} &= -trace(A)
+			\end{align*}
+		\end{subquestion}
+		
+		\newpage
+		\item {A matrix $ A $ is called $ nilpotent $ if $ A^r = 0 $ for some integer $ r > 1 $.}
+		\begin{subquestion}
+			\item {Show that all eigenvalues of $ A $ must be equal to 0.}
+			\begin{align*}
+				\shortintertext{Take $ \vec{\bm{x}} $ to be an eigenvector of $ A $ associated with eigenvalue $ \lambda $, then}
+				A \vec{\bm{x}} &= \lambda \vec{\bm{x}} \\
+				A^2 \vec{\bm{x}} &= A (A\vec{\bm{x}}) = A (\lambda \vec{\bm{x}}) = \lambda^2 \vec{\bm{x}} \\
+				\vdots \\
+				A^r \vec{\bm{x}} &= \lambda^r \vec{\bm{x}} 
+			\end{align*}
+			From $ A^r = 0 $ we can get $ \lambda^r = 0 $. Thus, $ \lambda = 0 $. Note that all eigenvalues of $ A $ apply to the above equation. Therefore, all eigenvalues of $ A $ must be equal to 0. \\
+			
+			\item {Is such a matrix diagonalizable?}
+			\begin{proof}
+				Assume matrix $ A $ is diagonalizable, then there exits an invertible matrix $ T $ such that \[ A = T^{-1}\Lambda T. \] 
+				The diagonal entries of matrix $ \Lambda $ are the eigenvalues of $ A $. Since all eigenvalues of $ A $ are equal to 0, $ \Lambda = 0 $. \\
+				Thus, the right side of the equation equals to 0, while the left side does not. \\
+				Therefore, no matrix $ T $ can satisfy this equation. This contradicts the assumption that there exits an invertible matrix $ T $ such that $ A = T^{-1}\Lambda T $. \\
+				By contradiction, matrix $ A $ is non-diagonalizable.
+			\end{proof}
+			\item {Give an example of a $ 2 \times 2 $ matrix which is $ nilpotent $.}
+			\begin{align*}
+				\begin{bmatrix}
+				0 & 1 \\
+				0 & 0
+				\end{bmatrix}
+				\begin{bmatrix}
+				0 & 1 \\
+				0 & 0
+				\end{bmatrix}
+				=
+				\begin{bmatrix}
+				0 & 0 \\
+				0 & 0
+				\end{bmatrix}
+				\shortintertext{Therefore, }
+				\begin{bmatrix}
+				0 & 1 \\
+				0 & 0
+				\end{bmatrix} && \text{is $ nilpotent $.}
+			\end{align*}
+			\item {If we apply a similarity transformation to a $ nilpotent $, is the resulting matrix $ nilpotent $? Apply the previous observation to your example in c) to obtain a second example of a $ nilpotent $ matrix.} \\
+			\begin{align*}
+				B &= T^{-1}A T \\
+				B^2 &= T^{-1}A T T^{-1}A T = T^{-1}A^2 T \\
+				\vdots \\
+				B^r &= T^{-1}A^r T \\
+				B^r &= 0 \\
+				\shortintertext{Thus, if we apply a similarity transformation to a $ nilpotent $ $ A $, the resulting matrix $ B $ is $ nilpotent $.}
+				A &= 
+				\begin{bmatrix}
+				0 & 1 \\
+				0 & 0
+				\end{bmatrix}
+				\\
+				T &= 
+				\begin{bmatrix}
+				0 & -1 \\
+				1 & 0
+				\end{bmatrix},
+				T^{-1} =
+				\begin{bmatrix}
+				0 & 1 \\
+				-1 & 0
+				\end{bmatrix}
+				\\
+				B &= T^{-1}AT \\
+				&= 
+				\begin{bmatrix}
+				0 & 1 \\
+				-1 & 0
+				\end{bmatrix}
+				\begin{bmatrix}
+				0 & 1 \\
+				0 & 0
+				\end{bmatrix}
+				\begin{bmatrix}
+				0 & -1 \\
+				1 & 0
+				\end{bmatrix}
+				\\
+				&= 
+				\begin{bmatrix}
+				0 & 0 \\
+				0 & -1
+				\end{bmatrix}
+				\begin{bmatrix}
+				0 & -1 \\
+				1 & 0
+				\end{bmatrix}
+				\\
+				&=
+				\begin{bmatrix}
+				0 & 0 \\
+				-1 & 0
+				\end{bmatrix}
+				\\
+				B^2 &= 
+				\begin{bmatrix}
+				0 & 0 \\
+				-1 & 0
+				\end{bmatrix}
+				\begin{bmatrix}
+				0 & 0 \\
+				-1 & 0
+				\end{bmatrix}
+				\\
+				&=
+				\begin{bmatrix}
+				0 & 0 \\
+				0 & 0
+				\end{bmatrix}
+				\shortintertext{Thus, after rotating matrix $ A = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} $ 90 degrees counterclockwisely, matrix $ B = \begin{bmatrix} 0 & 0 \\ -1 & 0 \end{bmatrix} $ is $ nilpotent $ for r = 2.}
+			\end{align*}
+		\end{subquestion}
 	\end{enumerate}
 \end{document}
