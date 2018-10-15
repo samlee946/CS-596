@@ -10,6 +10,8 @@
 \usepackage{algorithmic}
 \usepackage{eqparbox}
 \usepackage{float}
+\usepackage{bm}
+\usepackage{mathtools}
 
 \author{Shengjie Li}
 \title{Homework 1}
@@ -52,7 +54,7 @@
 				&= (1 - \lambda) * (1 + \epsilon - \lambda)
 			\end{align*}
 			Let $ \det(A - \lambda I) = 0 $ we can get eigenvalues $ \lambda_1 = 1, \lambda_2 = 1 + \epsilon $. \\
-			For $ \lambda = 1 $, solve $ A \vec{x} = \lambda \vec{x} $: 
+			For $ \lambda = 1 $, solve $ A \vec{\bm{x}} = \lambda \vec{\bm{x}} $: 
 			\begin{align*}
 				\begin{bmatrix}
 				1 & 0.5 \\
@@ -72,7 +74,8 @@
 				x_1 &= x_1 (x_1 \ne 0)\\
 				x_2 &= 0
 			\end{align*}
-			Therefore, $ \begin{bmatrix} 1 \\ 0 \end{bmatrix} $ is a eigenvector of $ A $ associated with the eigenvalue $ \lambda = 1 $. 
+			Therefore, $ \begin{bmatrix} 1 \\ 0 \end{bmatrix} $ is a eigenvector of $ A $ associated with the eigenvalue $ \lambda = 1 $. \\
+			For $ \lambda = 1 + \epsilon $, solve $ A \vec{\bm{x}} = \lambda \vec{\bm{x}} $: 
 			\begin{align*}
 				\begin{bmatrix}
 				1 & 0.5 \\
@@ -116,7 +119,7 @@
 				0 & \frac{\sqrt{1 + 4 \epsilon^2}}{2 \epsilon}
 				\end{bmatrix}
 				\\
-				T^{-1}AT &= 
+				\Lambda = T^{-1}AT &= 
 				\begin{bmatrix}
 				1 & -\frac{1}{2 \epsilon} \\
 				0 & \frac{\sqrt{1 + 4 \epsilon^2}}{2 \epsilon}
@@ -153,6 +156,51 @@
 			\\
 			When $ \epsilon $ is becoming closer to 0, the determinant of matrix $ T $ is becoming closer to 0. \\
 			Thus, when $ \epsilon = 0 $, matrix $ T $ will become non-invertable. Matrix $ A $ will become non-diagonalizable.
+		\end{enumerate}
+		
+		\item {Let A, B be two matrices of the same dimensions k × m.}
+		\begin{enumerate}
+			\item {With direct computation show that $ trace(AB^T ) = trace(B^T A) = trace(BA^T ) = trace(A^T B) $.} \\ \\
+			The $ i-th $ element in the diagonal of matrix $ AB^T $ is $ \sum\limits_{j = 1}^{m} a_{ij}b_{ij}$. Thus, $ trace(AB^T) = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} a_{ij}b_{ij} $. \\
+			The $ j-th $ element in the diagonal of matrix $ B^T A $ is $ \sum\limits_{i = 1}^{k} b_{ij}a_{ij}$. Thus, $ trace(B^T A) = \sum\limits_{j = 1}^{m}\sum\limits_{i = 1}^{k} b_{ij}a_{ij} = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} a_{ij}b_{ij}$. \\
+			The $ i-th $ element in the diagonal of matrix $ BA^T $ is $ \sum\limits_{j = 1}^{m} b_{ij}a_{ij}$. Thus, $ trace(BA^T) = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} b_{ij}a_{ij} = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} a_{ij}b_{ij}$.  \\
+			The $ j-th $ element in the diagonal of matrix $ A^T B $ is $ \sum\limits_{i = 1}^{k} a_{ij}b_{ij}$. Thus, $ trace(A^T B) = \sum\limits_{j = 1}^{m}\sum\limits_{i = 1}^{k} a_{ij}b_{ij} = \sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{m} a_{ij}b_{ij}$. \\
+			Therefore, $ trace(AB^T ) = trace(B^T A) = trace(BA^T ) = trace(A^T B) $.
+			
+			\item {Use question a) to compute $ \mathsf{E}[\textbf{x}^T A\textbf{x}] $ where $ \mathsf{E}[\cdot] $ denotes expectation, $ A $ is a constant matrix and $ \textbf{x} $ is a random vector for which we know that $ \mathsf{E}[\textbf{xx}^T ] = Q $. \textit{Hint: The trace of a scalar is the scalar itself.}} 
+			\begin{align*}
+				\shortintertext{Because $ \textbf{x}^T A\textbf{x} $ is a scalar, Therefore:}
+				\textbf{x}^T A\textbf{x} &= trace(\textbf{x}^T A\textbf{x}) \\
+				\mathsf{E}[\textbf{x}^T A\textbf{x}] &= \mathsf{E}[trace(\textbf{x}^T A\textbf{x})] \\
+				&= \mathsf{E}[trace(A\textbf{x} \textbf{x}^T)] \\
+				&= trace(\mathsf{E}[A\textbf{x} \textbf{x}^T]) \\
+				\shortintertext{Because A is constant, Therefore:} 
+				\mathsf{E}[\textbf{x}^T A\textbf{x}] &= trace(A \cdot \mathsf{E}[\textbf{x} \textbf{x}^T]) \\
+				&= trace(A \cdot Q)
+			\end{align*}
+			
+			\item {Using the previous properties show that for any matrix $ A $ of dimensions $ k \times k $ we have $ trace(A) = trace(U AU^{-1}) $ for any nonsingular matrix $ U $ of dimensions $ k \times k $. In other words that the trace does not change if we apply a similarity transformation.} 
+			\begin{equation*}
+				trace(U AU^{-1}) = trace(AU^{-1}U) = trace(AI) = trace(A)
+			\end{equation*}
+			
+			\item {Use question c) to
+				prove that if matrix $ A $ of dimensions $ k \times k $ is diagonalizable then its trace is equal to the sum of its eigenvalues
+				(actually this is true even if the matrix is not diagonalizable).}
+			\begin{align*}
+				\shortintertext{Because matrix $ A $ is diagonalizable, then there exist a matrix $ T $ such that:}
+				\Lambda &= T^{-1}AT \\
+				trace(\Lambda) &= trace(T^{-1}AT) = trace(A) \\
+				\shortintertext{Notice that $ \Lambda $ is a diagonal matrix with all eigenvalues of $ A $ as its diagonal entries. Thus, } 
+				trace(\Lambda) &= \text{sum of eigenvalues of $ A $.}  
+			\end{align*}
+			
+			\item {Regarding question d) how do you explain
+				this equality given that when $ A $ is real the trace is also real whereas the eigenvalues can be complex?} \\ \\
+			Because the complex eigenvalues of $ A $ will always come in complex conjugate pairs. Therefore, when we sum them up, we will always get real numbers. \\
+			
+			\item {Using again question d) what can you say about the coefficient $ c_{k-1} $ of the characteristic polynomial
+				$ \lambda^k + c_{k-1} \lambda^{k-1} + \dots + c_0 $ of $ A $. We recall that we already know that $ c_0 = (-1)^k \lambda_1 \cdots \lambda_k = (-1)^k \det(A) $.}
 		\end{enumerate}
 	\end{enumerate}
 \end{document}
