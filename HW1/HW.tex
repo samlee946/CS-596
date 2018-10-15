@@ -1,0 +1,158 @@
+\documentclass[letter, 11pt]{article}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{eqparbox}
+\usepackage{float}
+
+\author{Shengjie Li}
+\title{Homework 1}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\lhead{Shengjie Li \\ RUID: 188008047}
+\cfoot{\thepage} 
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headwidth}{\textwidth}
+\renewcommand\algorithmiccomment[1]{%
+	\hfill\#\ \eqparbox{COMMENT}{#1}%
+}
+
+\setlength\parindent{0pt}
+
+% margin adjustment
+\addtolength{\textwidth}{1in}
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+\setlength\parindent{0cm}
+
+\begin{document}
+	\centerline{Homework 1}
+	\begin{enumerate}[wide = 0pt, label = \textbf{Problem \arabic*:}]
+		\item {Consider the matrix \[ A = \begin{bmatrix}
+			1 & 0.5 \\
+			0 & 1 + \epsilon
+			\end{bmatrix}. \]} 
+		\begin{enumerate}
+			\item {Find the eigenvalues/eigenvectors of $ A $ assuming $ \epsilon \ne 0 $. Force your eigenvectors to have unit norm.} 
+			\begin{align*}
+				A - \lambda I &= \begin{bmatrix}
+								1 - \lambda & 0.5 \\
+								0 & 1 + \epsilon - \lambda
+								\end{bmatrix} \\
+				\det(A - \lambda I) &= (1 - \lambda) * (1 + \epsilon - \lambda) - 0.5 * 0 \\
+				&= (1 - \lambda) * (1 + \epsilon - \lambda)
+			\end{align*}
+			Let $ \det(A - \lambda I) = 0 $ we can get eigenvalues $ \lambda_1 = 1, \lambda_2 = 1 + \epsilon $. \\
+			For $ \lambda = 1 $, solve $ A \vec{x} = \lambda \vec{x} $: 
+			\begin{align*}
+				\begin{bmatrix}
+				1 & 0.5 \\
+				0 & 1 + \epsilon
+				\end{bmatrix}
+				\begin{bmatrix}
+				x_1 \\ x_2
+				\end{bmatrix}
+				&= 
+				\begin{bmatrix}
+				x_1 \\ x_2
+				\end{bmatrix}
+				\\ \downarrow \\
+				x_1 + 0.5x_2 &= x_1 \\
+				(1 + \epsilon) x_2 &= x_2 
+				\\ \downarrow \\
+				x_1 &= x_1 (x_1 \ne 0)\\
+				x_2 &= 0
+			\end{align*}
+			Therefore, $ \begin{bmatrix} 1 \\ 0 \end{bmatrix} $ is a eigenvector of $ A $ associated with the eigenvalue $ \lambda = 1 $. 
+			\begin{align*}
+				\begin{bmatrix}
+				1 & 0.5 \\
+				0 & 1 + \epsilon
+				\end{bmatrix}
+				\begin{bmatrix}
+				x_1 \\ x_2
+				\end{bmatrix}
+				&= 
+				(1 + \epsilon)
+				\begin{bmatrix}
+				x_1 \\ x_2
+				\end{bmatrix}
+				\\ \downarrow \\
+				x_1 + 0.5x_2 &= (1 + \epsilon) x_1 \\
+				(1 + \epsilon) x_2 &= (1 + \epsilon) x_2 
+				\\ \downarrow \\
+				x_1 &= \frac{x_2}{2 \epsilon}\\
+				x_2 &= x_2
+			\end{align*}
+			Therefore, $ \begin{bmatrix} \frac{1}{\sqrt{1 + 4 \epsilon^2}} \\ \frac{2 \epsilon}{\sqrt{1 + 4 \epsilon^2}} \end{bmatrix} $ is a eigenvector of $ A $ associated with the eigenvalue $ \lambda = 1 + \epsilon $. \\
+			
+			\item {Diagonalize $ A $ using the eigenvalues/eigenvectors you computed.} \\
+			Let $ T $ be the matrix with eigenvectors as its columns.
+			\begin{align*}
+				T &= 
+				\begin{bmatrix}
+				1 & \frac{1}{\sqrt{1 + 4 \epsilon^2}} \\
+				0 & \frac{2 \epsilon}{\sqrt{1 + 4 \epsilon^2}}
+				\end{bmatrix}
+				\\
+				T^{-1} &= \frac{1}{\frac{2 \epsilon}{\sqrt{1 + 4 \epsilon^2}}} 
+				\begin{bmatrix}
+				\frac{2 \epsilon}{\sqrt{1 + 4 \epsilon^2}} & -\frac{1}{\sqrt{1 + 4 \epsilon^2}} \\
+				0 & 1
+				\end{bmatrix}
+				\\
+				&=
+				\begin{bmatrix}
+				1 & -\frac{1}{2 \epsilon} \\
+				0 & \frac{\sqrt{1 + 4 \epsilon^2}}{2 \epsilon}
+				\end{bmatrix}
+				\\
+				T^{-1}AT &= 
+				\begin{bmatrix}
+				1 & -\frac{1}{2 \epsilon} \\
+				0 & \frac{\sqrt{1 + 4 \epsilon^2}}{2 \epsilon}
+				\end{bmatrix}
+				\begin{bmatrix}
+				1 & 0.5 \\
+				0 & 1 + \epsilon
+				\end{bmatrix}
+				\begin{bmatrix}
+				1 & \frac{1}{\sqrt{1 + 4 \epsilon^2}} \\
+				0 & \frac{2 \epsilon}{\sqrt{1 + 4 \epsilon^2}}
+				\end{bmatrix}
+				\\
+				&=
+				\begin{bmatrix}
+				1 & -\frac{1}{2 \epsilon}\\
+				0 & \frac{(1 + \epsilon)\sqrt{1 + 4 \epsilon^2}}{2 \epsilon}
+				\end{bmatrix}
+				\begin{bmatrix}
+				1 & \frac{1}{\sqrt{1 + 4 \epsilon^2}} \\
+				0 & \frac{2 \epsilon}{\sqrt{1 + 4 \epsilon^2}}
+				\end{bmatrix}
+				\\
+				&=
+				\begin{bmatrix}
+				1 & 0 \\
+				0 & 1 + \epsilon
+				\end{bmatrix}
+			\end{align*} \\
+			
+			\item {Start now sending $ \epsilon \to 0 $. What do
+				you observe is happening to the matrices you use for diagonalization as $ \epsilon $ becomes smaller and smaller? So
+				what do you conclude when $ \epsilon = 0 $?} \\
+			\\
+			When $ \epsilon $ is becoming closer to 0, the determinant of matrix $ T $ is becoming closer to 0. \\
+			Thus, when $ \epsilon = 0 $, matrix $ T $ will become non-invertable. Matrix $ A $ will become non-diagonalizable.
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
