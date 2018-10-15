@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.9.26)  15 OCT 2018 15:03
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.9.26)  15 OCT 2018 17:19
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -433,20 +433,31 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [4]
+Underfull \hbox (badness 10000) in paragraph at lines 337--346
+
+ []
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 25.39978pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[5] (./HW.aux) ) 
+[5]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 25.39978pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[6] (./HW.aux) ) 
 Here is how much of TeX's memory you used:
  4744 strings out of 492962
  66964 string characters out of 6133575
- 160021 words of memory out of 5000000
+ 161021 words of memory out of 5000000
  8666 multiletter control sequences out of 15000+600000
  13880 words of font info for 58 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 28i,15n,43p,338b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,17n,43p,460b,575s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on HW.pdf (5 pages).
+Output written on HW.pdf (6 pages).

@@ -329,5 +329,56 @@
 				\shortintertext{Thus, after rotating matrix $ A = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} $ 90 degrees counterclockwisely, matrix $ B = \begin{bmatrix} 0 & 0 \\ -1 & 0 \end{bmatrix} $ is $ nilpotent $ for r = 2.}
 			\end{align*}
 		\end{subquestion}
+	
+		\item {Let $ Q $ be symmetric and positive definite with dimensions $ k \times k $. Denote with $ Q_i $ the matrix we obtain from $ Q $ by eliminating its $ i $th column and $ i $th row.}
+		\begin{subquestion}
+			\item {Show that $ Q_i $ is also symmetric and positive definite. Extend this to when we eliminate more than one columns and rows.}
+			\begin{proof}
+				Because $ Q $ is symmetric and positive definite. \\
+				$ Q_{xy} = Q_{yx} $ for $ x, y \in [1, k] $. \\
+				Thus, $ Q_{xy} = Q_{yx} $ is also true for $ x, y \in [1, i) \cup (i, k] $. \\
+				Therefore, $ Q_i $ is symmetric. \\
+				\\
+				For any non-zero $ k \times 1 $ vector $ \vec{\bm{x}} $, we have $ \vec{\bm{x}}^T Q \vec{\bm{x}} > 0 $. \\
+				Let $ \hat{\vec{\bm{x}}} $ be a vector we obtain from $ \vec{\bm{x}} $ by eliminating its $ i $th element. \\
+				Let $ \hat{\hat{\vec{\bm{x}}}} = \vec{\bm{x}} $ except that $ \hat{\hat{\vec{\bm{x}}}}_i = 0 $, then we get $ \hat{\vec{\bm{x}}}^T Q_i \hat{\vec{\bm{x}}} = \hat{\hat{\vec{\bm{x}}}}^T Q \hat{\hat{\vec{\bm{x}}}} > 0 $. \\
+				Therefore, $ Q_i $ is symmetric and positive definite.
+			\end{proof}
+		
+			\item {Show that the largest
+				eigenvalue of $ Q $ is larger than the largest eigenvalue of $ Q_i $ and, that the smallest eigenvalue of $ Q $ is smaller
+				than the smallest eigenvalue of $ Q_i $ .}
+			\begin{proof}
+				\begin{align*}
+					\lambda_{max}(Q_i) & = \max\limits_{\hat{\vec{\bm{x}}}} \frac{\hat{\vec{\bm{x}}}^T Q_i \hat{\vec{\bm{x}}}}{\hat{\vec{\bm{x}}}^T \hat{\vec{\bm{x}}}} \\
+					\frac{\hat{\vec{\bm{x}}}^T Q_i \hat{\vec{\bm{x}}}}{\hat{\vec{\bm{x}}}^T \hat{\vec{\bm{x}}}} & = \frac{\hat{\hat{\vec{\bm{x}}}}^T Q \hat{\hat{\vec{\bm{x}}}}}{\hat{\hat{\vec{\bm{x}}}}^T \hat{\hat{\vec{\bm{x}}}}} \le \frac{\vec{\bm{x}}^T Q \vec{\bm{x}}}{\vec{\bm{x}}^T \vec{\bm{x}}} && \text{($ \hat{\hat{\vec{\bm{x}}}} = \vec{\bm{x}} $ except that $ \hat{\hat{\vec{\bm{x}}}}_i = 0 $)} \\
+					\shortintertext{Therefore, }
+					\min\limits_{\hat{\vec{\bm{x}}}} \frac{\hat{\vec{\bm{x}}}^T Q_i \hat{\vec{\bm{x}}}}{\hat{\vec{\bm{x}}}^T \hat{\vec{\bm{x}}}} & \le \max\limits_{\hat{\vec{\bm{x}}}} \frac{\hat{\vec{\bm{x}}}^T Q_i \hat{\vec{\bm{x}}}}{\hat{\vec{\bm{x}}}^T \hat{\vec{\bm{x}}}} \le 
+					\min\limits_{\vec{\bm{x}}} \frac{\vec{\bm{x}}^T Q \vec{\bm{x}}}{\vec{\bm{x}}^T \vec{\bm{x}}} \le
+					\max\limits_{\vec{\bm{x}}} \frac{\vec{\bm{x}}^T Q \vec{\bm{x}}}{\vec{\bm{x}}^T \vec{\bm{x}}} \\
+					\lambda_{min}(Q_i) & \le\lambda_{max}(Q_i) \le \lambda_{min}(Q)\le \lambda_{max}(Q)
+				\end{align*}
+			\end{proof}
+		
+			\item {If $ A $ is a square matrix (not necessarily symmetric and positive
+				definite) of dimensions $ k \times k $ and $ \lambda_1 , \dots , \lambda_k $ are its eigenvalues while $ \sigma_1 , \dots , \sigma_k $ are its singular values (obtained by applying SVD) then show \[ \min\limits_{i} \sigma_i \le \min\limits_{i} |\lambda i | \le \max\limits_{i} |\lambda i | \le \max\limits_{i} \sigma_i. \] In other words the eigenvalues are located on the complex plane inside an annulus with the two circle radii
+				defined by the largest and smallest singular value. \textit{Use the result we proved in class regarding the bounds of
+				the ratio $ \frac{\mathbf{x}^T C \mathbf{x}}{\mathbf{x}^T \mathbf{x}} $ for $ C $ symmetric. Consider that this is true even if $ \mathbf{x} $ is a vector with complex elements.}}
+				\begin{proof}
+					\begin{align*}
+						\shortintertext{We know that:}
+						\lambda_{max}(C) & \ge \frac{(\vec{\bm{x}}^*)^T C \vec{\bm{x}}}{(\vec{\bm{x}}^*)^T \vec{\bm{x}}} \ge \lambda_{min}(C) \\
+						\sigma_1^2 & \ge \frac{(\vec{\bm{x}}^*)^T A^T A \vec{\bm{x}}}{(\vec{\bm{x}}^*)^T \vec{\bm{x}}} \ge \sigma_k^2 \\
+						\shortintertext{From $ A\vec{\bm{x_{i}}} = \lambda_i\vec{\bm{x_{i}}} $ and $ A(\vec{\bm{x_{i}}}^*) = \lambda_i^*(\vec{\bm{x_{i}}}^*) $ we have:}
+						\frac{(\vec{\bm{x_{i}}}^*)^T A^T A \vec{\bm{x_{i}}}}{(\vec{\bm{x_{i}}}^*)^T \vec{\bm{x_{i}}}} = \frac{(A\vec{\bm{x_{i}}}^*)^T A \vec{\bm{x_{i}}}}{(\vec{\bm{x_{i}}}^*)^T \vec{\bm{x_{i}}}} &= \frac{(\lambda_i^*(\vec{\bm{x_{i}}}^*))^T \lambda_i\vec{\bm{x_{i}}}}{(\vec{\bm{x_{i}}}^*)^T \vec{\bm{x_{i}}}} = \frac{\lambda_i^*(\vec{\bm{x_{i}}}^*)^T \lambda_i\vec{\bm{x_{i}}}}{(\vec{\bm{x}}^*)^T \vec{\bm{x}}} = \lambda_i^*\lambda_i = | \lambda_i |^2 \\
+						\shortintertext{Thus,}
+						\sigma_1^2 & \ge | \lambda_i |^2 \ge \sigma_k^2. \\
+						\shortintertext{Because $ \sigma_k $ is not negative, }
+						\sigma_1 & \ge | \lambda_i | \ge \sigma_k. \\
+						\shortintertext{Therefore,}
+						\min\limits_{i} \sigma_i \le \min\limits_{i} |\lambda i | & \le \max\limits_{i} |\lambda i | \le \max\limits_{i} \sigma_i.
+					\end{align*}
+				\end{proof}
+		\end{subquestion}
 	\end{enumerate}
 \end{document}
