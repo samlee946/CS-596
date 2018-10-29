@@ -1,0 +1,106 @@
+\documentclass[letter, 11pt]{article}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{eqparbox}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\author{Shengjie Li}
+\title{Homework 2}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\lhead{Shengjie Li \\ RUID: 188008047}
+\cfoot{\thepage} 
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headwidth}{\textwidth}
+\renewcommand\algorithmiccomment[1]{%
+	\hfill\#\ \eqparbox{COMMENT}{#1}%
+}
+\newlist{subquestion}{enumerate}{1}
+\setlist[subquestion, 1]{label = \alph*)}
+
+\setlength\parindent{0pt}
+
+% margin adjustment
+\addtolength{\textwidth}{1in}
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+\setlength\parindent{0cm}
+
+\begin{document}
+	\centerline{Homework 2}
+	\begin{enumerate}[wide = 0pt, label = \textbf{Problem \arabic*:}]
+		\item {Let $ \mathcal{X}_1 , \mathcal{X}_2 $ be two jointly Gaussian vectors with means $ \mu_1 , \mu_2 $ covariance matrices $ \Sigma_{11} , \Sigma_{22} $ and
+			cross covariance matrix $ \Sigma_{12} = \mathbb{E}[(\mathcal{X}_1 - \mu_1 )(\mathcal{X}_2 - \mu_2 )^t ] $. By computing the conditional probability density
+			prove that $ \mathcal{X}_1 $ given $ \mathcal{X}_2 $ continuous to be Gaussian with mean that depends on $ \mathcal{X}_2 $ but with a covariance
+			matrix which is independent of $ \mathcal{X}_2 $ .}
+		
+		\item {Consider a Bernoulli random variable $ \chi $ that takes the value $ a_1 $ with probability $ p $ and the
+			value $ a_2 (a_2 \ne a_1 ) $ with probability $ 1 −p $. }
+		\begin{subquestion}
+			\item {Compute the the average and the variance of $ \chi $.}
+			
+			\item {Suppose now
+				that you generate $ N $ independent realizations of $ \chi $. Propose a way to estimate $ p = \mathbb{P}(\chi = a_1 ) $.}
+			
+			\item {Compute
+				the mean and variance of your estimate. What can you conclude from this computation when you consider
+				$ N \rightarrow \infty $?}
+		\end{subquestion}
+	
+		\item {$ \mathcal{X} $ is a random vector and there are $ K $ different possibilities that can generate realizations of this
+			vector. Let $ f_1 (X), . . . , f_K (X) $ the corresponding pdfs and $ p_1 , . . . , p_K $ the corresponding prior probabilities
+			that each case can occur of each possibility (with $ p_1 + \dots + p_K = 1 $). Using total probability and the trick
+			that relates a pdf to the probability of a differential event, show that the pdf $ f (X) $ of $ \mathcal{X} $ satisfies \[ f_(X) = p_1 f_1 (X) + \dots + p_k f_K (X). \] Let now $ \chi_1 , \chi_2 $ be two random variables which 99\% of the time are independent and Normally (Gaussian)
+			distributed, both with mean 0 and variance 1 and 1\% of the time they are independent and Normally
+			distributed both with mean 0 and variance $ \sigma_2 \ne 1 $.}
+		\begin{subquestion}
+			\item {Compute the joint pdf of the two random variables.}
+			
+			\item {Examine if the two random variables are \textit{independent}.}
+			
+			\item {Give an example of two random variables that
+				are \textit{uncorrelated} but not independent.}
+		\end{subquestion}
+	
+		\item {Let $ \chi, \zeta $ be random variables that are related through the equality \[ \zeta = |\chi + s|. \]}
+		\begin{subquestion}
+			\item {If the pdf of $ \chi $ is $ f_\chi (x) $ compute the pdf of $ \zeta $ when $ s $ is a deterministic quantity.}
+			
+			\item {Repeat the previous
+				question when $ s $ is a random variable independent from $ \chi $ and takes only the two values 0 and 1 with
+				probabilities 0.2 and 0.8 respectively.}
+			
+			\item {Under the assumptions of question b) compute the posterior
+				probability $ \mathbb{P}(s = 0|\zeta = z) $. \textit{Hint: For the computation of the pdf of a random variable the simplest way is
+				to start with the computation of the cdf and then take the derivative. For b) use total probability.}}
+		\end{subquestion}
+		
+		\item {Consider the space of all scalar random variables.}
+		\begin{subquestion}
+			\item {Show that this is a vector space by
+				defining properly the operation of addition and multiplication.}
+			
+			\item {For any two random variables $ \chi, \psi $ we
+				define the mapping $ < \chi, \psi > = \mathbb{E}[\chi\psi] $. Show that this mapping is an inner product in our vector space.}
+			
+			\item {What particular form do you obtain when you apply the general Schwarz inequality?}
+			
+			\item {How would you
+				extend the previous definitions if you want a vector space comprised of \textit{random vectors} of length $ d $? Define
+				properly the inner product and find the new form of the Schwartz inequality.}
+			
+		\end{subquestion}
+	\end{enumerate}
+\end{document}
