@@ -1,4 +1,4 @@
-\documentclass[letter, 11pt]{article}
+\documentclass[letter, 12pt]{article}
 
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{fancyhdr}
@@ -32,8 +32,8 @@
 
 % margin adjustment
 \addtolength{\textwidth}{1in}
-\addtolength{\oddsidemargin}{-0.375in}
-\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
 \addtolength{\topmargin}{-.5in}
 \addtolength{\textheight}{1.0in}
 \setlength\parindent{0cm}
@@ -45,6 +45,92 @@
 			cross covariance matrix $ \Sigma_{12} = \mathbb{E}[(\mathcal{X}_1 - \mu_1 )(\mathcal{X}_2 - \mu_2 )^t ] $. By computing the conditional probability density
 			prove that $ \mathcal{X}_1 $ given $ \mathcal{X}_2 $ continuous to be Gaussian with mean that depends on $ \mathcal{X}_2 $ but with a covariance
 			matrix which is independent of $ \mathcal{X}_2 $ .}
+		\begin{proof}
+			\begin{align*}
+				\Sigma &= \begin{bmatrix}
+				\Sigma_{11} & \Sigma_{12} \\
+				\Sigma_{21} &\Sigma_{22}
+				\end{bmatrix} 
+				= \mathbb{E}[\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix} \begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix}]
+				\\
+				\Sigma_{11} &= \mathbb{E}[\mathcal{X}_1, \mathcal{X}_1^t] \quad \quad
+				\Sigma_{12} = \mathbb{E}[\mathcal{X}_1, \mathcal{X}_2^t] \\
+				\Sigma_{21} &= \mathbb{E}[\mathcal{X}_2, \mathcal{X}_1^t] \quad \quad
+				\Sigma_{22} = \mathbb{E}[\mathcal{X}_2, \mathcal{X}_2^t] 
+				\shortintertext{Suppose $ \mathcal{X} $ has zero mean, we can get the joint probability density function}
+				f(\mathcal{X}_1, \mathcal{X}_2) &= \frac{e^{-\frac{1}{2} \begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix} \Sigma^{-1} 
+						\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix} }}{\sqrt{(2 \pi)^{d_1 + d_2}|\Sigma|}} \\
+				f(\mathcal{X}_2) &= \frac{e^{-\frac{1}{2} \mathcal{X}_2^t \Sigma_{22}^t 
+						\mathcal{X}_2 }}{\sqrt{(2 \pi)^{d_2}|\Sigma_{22}|}} \\
+				f(\mathcal{X}_1 | \mathcal{X}_2) &= \frac{
+					f(\mathcal{X}_1, \mathcal{X}_2)}{f(\mathcal{X}_2)} \\
+				&= \frac{\frac{e^{-\frac{1}{2} \begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix} \Sigma^{-1} 
+							\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix} }}{\sqrt{(2 \pi)^{d_1 + d_2}|\Sigma|}}}{\frac{e^{-\frac{1}{2} \mathcal{X}_2^t \Sigma_{22}^t 
+							\mathcal{X}_2 }}{\sqrt{(2 \pi)^{d_2}|\Sigma_{22}|}}} \\
+				&= \frac{e^{-\frac{1}{2} (\begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix} \Sigma^{-1} 
+							\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix} - \mathcal{X}_2^t \Sigma_{22}^t 
+							\mathcal{X}_2) }}{\sqrt{(2 \pi)^{d_1}\frac{|\Sigma|}{|\Sigma_{22}|}}}
+				\shortintertext{By using Schur's Inversion Formula, we can get:} 
+				\begin{bmatrix}
+				\Sigma_{11} & \Sigma_{12} \\
+				\Sigma_{21} &\Sigma_{22}
+				\end{bmatrix} ^{-1}
+				&=
+				\begin{bmatrix}
+				0 & 0 \\
+				0 &\Sigma_{22}^{-1}
+				\end{bmatrix} 
+				+
+				\begin{bmatrix}
+				I \\ -E
+				\end{bmatrix}
+				\Delta^{-1}
+				\begin{bmatrix}
+				I & -F
+				\end{bmatrix} \\
+				E &= \Sigma_{22}^{-1} \Sigma_{21} = \Sigma_{22}^{-1} \Sigma_{12}^t \\
+				F &= \Sigma_{12} \Sigma_{22}^{-1} \\
+				\Delta &= \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1} \Sigma_{21} = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1} \Sigma_{12}^t \\
+				\begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix} \Sigma^{-1} 
+				\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix} - \mathcal{X}_2^t \Sigma_{22}^t 
+				\mathcal{X}_2
+				&=
+				\begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix} \begin{bmatrix}
+				0 & 0 \\
+				0 &\Sigma_{22}^{-1}
+				\end{bmatrix} 
+				\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix}
+				+
+				\begin{bmatrix} \mathcal{X}_1^t & \mathcal{X}_2^t \end{bmatrix} \begin{bmatrix}
+				I \\ -E
+				\end{bmatrix}
+				\Delta^{-1}
+				\begin{bmatrix}
+				I & -F
+				\end{bmatrix} 
+				\begin{bmatrix} \mathcal{X}_1 \\ \mathcal{X}_2 \end{bmatrix}
+				- 
+				\mathcal{X}_2^t \Sigma_{22}^t 
+				\mathcal{X}_2 \\
+				&=
+				(\mathcal{X}_1 - \Sigma_{12} \Sigma_{22}^{-1} \mathcal{X}_2)^t(\Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{12}^t)(\mathcal{X}_1 - \Sigma_{12} \Sigma_{22}^{-1} \mathcal{X}_2) \\
+				\det
+				\begin{bmatrix}
+				\Sigma_{11} & \Sigma_{12} \\
+				\Sigma_{11}^t &\Sigma_{22}
+				\end{bmatrix}
+				&=
+				\det(\Sigma_{22})\det(\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^t) \\
+				\frac{|\Sigma|}{|\Sigma_{22}|} &= |\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^t| \\
+				f(\mathcal{X}_1 | \mathcal{X}_2) 
+				&=
+				\frac{e^{-\frac{1}{2}(\mathcal{X}_1 - \Sigma_{12} \Sigma_{22}^{-1} \mathcal{X}_2)^t(\Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{12}^t)(\mathcal{X}_1 - \Sigma_{12} \Sigma_{22}^{-1} \mathcal{X}_2)}}{\sqrt{(2 \pi)^{d_1}|\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^t|}} \\
+				\shortintertext{Thus,}
+				\mathcal{X}_1 &\sim \mathcal{N}(\Sigma_{12}\Sigma_{22}^{-1}\mathcal{X}_2, \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^t) \\
+				\shortintertext{When $ \mathcal{X}_1 $ and $ \mathcal{X}_2 $ do not have zero mean,}
+				\mathcal{X}_1 - \mu_1 &\sim \mathcal{N}(\Sigma_{12}\Sigma_{22}^{-1}(\mathcal{X}_2 - \mu_2), \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^t) \\
+			\end{align*}
+		\end{proof}
 		
 		\item {Consider a Bernoulli random variable $ \chi $ that takes the value $ a_1 $ with probability $ p $ and the
 			value $ a_2 (a_2 \ne a_1 ) $ with probability $ 1 −p $. }
