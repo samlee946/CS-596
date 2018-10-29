@@ -200,7 +200,7 @@
 			\begin{align*}
 				f(\chi_1) &= 0.99\frac{e^{-\frac{1}{2}(\chi_1^2)}}{\sqrt{(2\pi)^2}} + 0.01\frac{e^{-\frac{1}{2\sigma^2}(\chi_1^2)}}{\sqrt{(2\pi)^2\sigma^4}} \\
 				f(\chi_2) &= 0.99\frac{e^{-\frac{1}{2}(\chi_2^2)}}{\sqrt{(2\pi)^2}} + 0.01\frac{e^{-\frac{1}{2\sigma^2}(\chi_2^2)}}{\sqrt{(2\pi)^2\sigma^4}} \\
-				f(X) &\ne f(\chi_1) \times f(\chi_2)
+				f(X) &= 0.99\frac{e^{-\frac{1}{2}(\chi_1^2 + \chi_2^2)}}{\sqrt{(2\pi)^2}} + 0.01\frac{e^{-\frac{1}{2\sigma^2}(\chi_1^2 + \chi_2^2)}}{\sqrt{(2\pi)^2\sigma^4}} \ne f(\chi_1) \times f(\chi_2)
 				\shortintertext{Thus, they are not independent.}
 			\end{align*}
 		
@@ -209,7 +209,7 @@
 			\\
 			Let $ X \sim U(-1, 1) $. \\
 			Let $ Y = X^2 $. \\
-			They are not independent. \\
+			They are not independent. 
 			\begin{align*}
 				cov(X, Y) &= \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] \\
 				&= \mathbb{E}[X^3] - \mathbb{E}[X]\mathbb{E}[X^2] \\
