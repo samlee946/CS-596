@@ -234,27 +234,60 @@
 				probabilities 0.2 and 0.8 respectively.}
 			\begin{align*}
 			f_g(z) &= f_g(z|s=0)\mathbb{P}(s=0) + f_g(z|s=1)\mathbb{P}(s=1) \\
+			&= 0.2(f_\chi(z) - f_\chi(-z)) + 0.8(f_\chi(z - 1) - f_\chi(-z - 1))
 			\end{align*}
 			
 			\item {Under the assumptions of question b) compute the posterior
 				probability $ \mathbb{P}(s = 0|\zeta = z) $. \textit{Hint: For the computation of the pdf of a random variable the simplest way is
 				to start with the computation of the cdf and then take the derivative. For b) use total probability.}}
+			\begin{align*}
+				\mathbb{P}(s=0|\zeta = z) = \frac{\mathbb{P}(\zeta = z|s=0)\mathbb{P}(s=0)}{\mathbb{P}(\zeta = z|s=0)\mathbb{P}(s=0) + \mathbb{P}(\zeta = z|s=1)\mathbb{P}(s=1)}
+			\end{align*}
 		\end{subquestion}
 		
 		\item {Consider the space of all scalar random variables.}
 		\begin{subquestion}
 			\item {Show that this is a vector space by
-				defining properly the operation of addition and multiplication.}
+				defining properly the operation of addition and multiplication.} \\
+			\\
+			Let $ V $ be a set of vectors. \\
+			We define the following operations:
+			\begin{enumerate}
+				\item {For all $ \chi, \psi \in V$, $ \chi + \psi \in V$.}
+				\item {If $ \chi \in V$ and $ \alpha $ is a real number, $ \alpha \cdot \chi \in V$.}
+			\end{enumerate}
+			Then $ V $ is a vector space.\\
 			
 			\item {For any two random variables $ \chi, \psi $ we
 				define the mapping $ < \chi, \psi > = \mathbb{E}[\chi\psi] $. Show that this mapping is an inner product in our vector space.}
+			\begin{enumerate}
+				\item {Conjugate symmetry:} \\
+				$ < \psi, \chi > = \mathbb{E}[\psi\chi] = \mathbb{E}[\chi\psi] = < \chi, \psi >$
+				\item {Linearity in the first argument:}\\
+				$ < \alpha \chi, \psi > = \mathbb{E}[\alpha\chi\psi] = \alpha\mathbb{E}[\chi\psi] = \alpha < \chi, \psi >$ \\
+				$ < \chi + \zeta, \psi > = \mathbb{E}[(\chi + \zeta)\psi] = \mathbb{E}[\chi\psi] + \mathbb{E}[\zeta\psi] = < \chi, \psi > + < \zeta, \psi >$ 
+				\item {Positive-definiteness:} \\
+				$ < \chi , \chi > = \mathbb{E}(\chi^2) \ge 0$ \\
+				If $ < \chi , \chi > = \mathbb{E}(\chi^2) = 0$, then $ \chi = \vec{0} $.
+			\end{enumerate}
+			Thus, this mapping is an inner product in our vector space.\\
 			
 			\item {What particular form do you obtain when you apply the general Schwarz inequality?}
-			
+			\begin{align*}
+				|<\chi, \psi>| &\le \sqrt{< \chi , \chi >} \sqrt{< \psi , \psi >} \\
+				|\mathbb{E}[\chi\psi]| &\le \sqrt{\mathbb{E}[\chi^2]} \sqrt{\mathbb{E}[\psi^2]} 
+			\end{align*}
 			\item {How would you
 				extend the previous definitions if you want a vector space comprised of \textit{random vectors} of length $ d $? Define
-				properly the inner product and find the new form of the Schwartz inequality.}
-			
+				properly the inner product and find the new form of the Schwartz inequality.} \\
+			\\
+			Let $ \chi, \psi $ be random vectors of length $ d $, then we can define the inner product to be: 
+			\[< \chi, \psi > = \mathbb{E}[\chi^t\psi]. \]
+			Then the new  form of the Schwartz inequality will be: 
+			\begin{align*}
+				< \chi, \psi > &= |\mathbb{E}[\chi^t\psi]| \le \sqrt{\mathbb{E}[||\chi||^2]} \sqrt{\mathbb{E}[||\psi||^2]} \\
+				|\mathbb{E}[\chi_1\psi_1 + \dots + \chi_d\psi_d]| &\le \sqrt{\mathbb{E}[\chi_1^2 + \dots + \chi_d^2]} \sqrt{\mathbb{E}[\psi_1^2 + \dots + \psi_d^2]}
+			\end{align*}
 		\end{subquestion}
 	\end{enumerate}
 \end{document}
