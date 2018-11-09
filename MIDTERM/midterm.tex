@@ -163,7 +163,34 @@
 		decision. }
 		\begin{subquestion}
 			\item {In the 2D space with axes $ \mathsf{L}_1, \mathsf{L}_2 $ identify the regions for which you decide in favor of each of the three scenarios $ \mathsf{H}_0 , \mathsf{H}_1 , \mathsf{H}_2 $ .}
-			\item {What happens at the boundaries between two regions? What happens at the single point which belongs to the boundary of all three regions?}
+			\begin{align*}
+				\shortintertext{Denote the cost of outcome $ i $ and hypothesis $ j $ by $ C_{ij} $.  
+				Let 
+				$ \begin{cases}
+					C_{ij} = 1, i \ne j \\
+					C_{ij} = 0, i = j
+				\end{cases} $, then we have}
+				C(\delta_0, \delta_1, \delta_2) &= \int ((\delta_0 (f_1(x) \mathbb{P}(H_1) + f_2(x) \mathbb{P}(H_2)) + (\delta_1 (f_0(x) \mathbb{P}(H_0) + f_2(x) \mathbb{P}(H_2)) \\
+				&+ (\delta_2 (f_0(x) \mathbb{P}(H_0) + f_1(x) \mathbb{P}(H_1))) dx.
+				\shortintertext{Because $ {P}(H_0) = {P}(H_1) = {P}(H_2) $, }
+				\argmin_{\delta_0, \delta_1, \delta_2} C(\delta_0, \delta_1, \delta_2) &=
+				\int ((\delta_0 (f_1(x) + f_2(x)) + (\delta_1 (f_0(x) + f_2(x)) \\
+				&+ (\delta_2 (f_0(x) + f_1(x))) dx.
+			\end{align*}
+			Denote $ f_1(x) + f_2(x) $ by $ C_0 $, $ f_0(x) + f_2(x) $ by $ C_1 $, $ f_0(x) + f_1(x) $ by $ C_2 $, then we can get the optimum decision mechanism: let $ C_i = min(C_0, C_1, C_2) $, set $ \delta_i $ to 1 and any other $ \delta $ to 0. \\
+			The region would look like this:
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.5\textwidth]{fig.png}
+			\end{figure}
+			
+			\item {What happens at the boundaries between two regions? What happens at the single point which belongs to the boundary of all three regions?}\\
+			\\
+			We already knew that all prior probabilities are equal. \\
+			Therefore, for $ L_1 = 1 $, we let $ C_i = min(C_0, C_1) $, set $ \delta_i $ to 1 and any other $ \delta $ to 0.\\
+			For $ L_2 = 1 $, we let $ C_i = min(C_0, C_2) $, set $ \delta_i $ to 1 and any other $ \delta $ to 0.\\
+			For $ L_1 = L_2 $, we let $ C_i = min(C_1, C_2) $, set $ \delta_i $ to 1 and any other $ \delta $ to 0.\\
+			For the boundary of all three regions, let $ C_i = min(C_0, C_1, C_2) $, set $ \delta_i $ to 1 and any other $ \delta $ to 0.
 		\end{subquestion}
 	
 		\item {As discussed in the class the space of all random variables constitutes a vector space. We can also define an inner product (also mentioned in class) between two random vectors $ x, y $ 
@@ -171,7 +198,22 @@
 				<x, y>= E[xy].
 			\end{align*} Consider now the following random variables $ x, z, w $. We are interested in linear combinations of the form $ \hat{x}= az + bw $ where a, b are real deterministic quantities.}
 		\begin{subquestion}
-			\item {By using the orthogonality principle find the $ \hat{x}_\ast $ (equivalently the optimum coefficients $ a_\ast , b _\ast $ ) that is closest to x in the sense of the norm induced by the inner product.}
+			\item {By using the orthogonality principle find the $ \hat{x}_\ast $ (equivalently the optimum coefficients $ a_\ast , b _\ast $ ) that is closest to x in the sense of the norm induced by the inner product.}\\
+			\\
+			Suppose the vector space is $ V = \lbrace y; y = az + bw \rbrace$, $ W $ is a subspace of $ V $. \\
+			We want to find the $ \hat{x}_\ast $ that is closest to x, that is:
+			\begin{align*}
+				&\argmin_{\hat{x}} || x - \hat{x} ||, <x - \hat{x}, y> = 0 \text{ for all $ y $ in $ W $}.
+				\shortintertext{Then we can get}
+				&<x - \hat{x}, z> = <x - \hat{x}, w> = 0 \\
+				&<x - \hat{x}, z> = <x - (az + bw), z> = E[(x - (az + bw))z] = E[xz] - aE[z^2] - bE[wz] = 0 \\
+				&E[xz] = aE[z^2] - bE[wz] \\
+				&<x - \hat{x}, w> = <x - (az + bw), w> = E[(x - (az + bw))w] = E[xw] - aE[z^2] - bE[wz] = 0 \\
+				&E[xw] = aE[zw] - bE[w^2] \\
+				&a_{\ast} = \frac{E[xz]E[w^2] - E[xw]E[wz]}{E[z^2]E[w^2] - E[wz]^2} \\
+				&b_{\ast} = \frac{E[xw]E[z^2] - E[xz]E[wz]}{E[z^2]E[w^2] - E[wz]^2}
+			\end{align*}
+			
 			\item {Compute the optimum (minimum) distance and its optimum approximation $ \hat{x}_\ast $ in terms of $ E[xz], E[xw], E[z^2 ], E[zw], E[w^2] $.}
 			\item {Explain what is the physical meaning of this approximation.}
 		\end{subquestion}
