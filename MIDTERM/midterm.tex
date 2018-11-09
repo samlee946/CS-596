@@ -78,23 +78,39 @@
 				\begin{align*}
 					\shortintertext{Let $ C_{00} = C_{11} = 0$, $ C_{01} = C_{10} = 1 $, then} 
 					C(\delta_0, \delta_1) &=  \mathbb{P}(D_0 \& H_1) + \mathbb{P}(D_1 \& H_0) \\
-					&= \int\delta_0(X)f_1(X)dX \cdot \mathbb{P}(H_1) + \int\delta_1(X)f_0(X)dX \cdot \mathbb{P}(H_0). \\
-					\\
+					&= \int\delta_0(X)f_1(X)dX \cdot \mathbb{P}(H_1) + \int\delta_1(X)f_0(X)dX \cdot \mathbb{P}(H_0). 
+				\end{align*}
+				\begin{align*}
 					\shortintertext{By definition, we can get:} 
-					F_0(x) &= \prod_{i=1}^{N}P(X_i < x) = \prod_{i=1}^{N}P(-s\alpha_i + \omega_i < x) = \prod_{i=1}^{N}P(\omega_i< x +s\alpha_i) = \prod_{i=1}^{N}F_{w_i}(x + s\alpha_i) ,\\
-					f_0(x) &= \prod_{i=1}^{N}f_{w_i}(x + s\alpha_i) .\\
-					F_1(x) &= \prod_{i=1}^{N}P(X_i < x) = \prod_{i=1}^{N}P(s\alpha_i + \omega_i < x) = \prod_{i=1}^{N}P(\omega_i< x -s\alpha_i) = \prod_{i=1}^{N}F_{w_i}(x - s\alpha_i) ,\\
-					f_1(x) &= \prod_{i=1}^{N}f_{w_i}(x - s\alpha_i) .\\
+					&F_0(X) = \prod_{i=1}^{N}P(x_i < X_i) = \prod_{i=1}^{N}P(-s\alpha_i + \omega_i < X_i) = \prod_{i=1}^{N}P(\omega_i< X_i +s\alpha_i) = \prod_{i=1}^{N}F_{w_i}(X_i + s\alpha_i) ,\\
+					&f_0(X) = \prod_{i=1}^{N}f_{w_i}(X_i + s\alpha_i) .\\
+					&F_0(X) = \prod_{i=1}^{N}P(x_i < X_i) = \prod_{i=1}^{N}P(-s\alpha_i - \omega_i < X_i) = \prod_{i=1}^{N}P(\omega_i< X_i -s\alpha_i) = \prod_{i=1}^{N}F_{w_i}(X_i - s\alpha_i) ,\\
+					&f_0(X) = \prod_{i=1}^{N}f_{w_i}(X_i - s\alpha_i) .
+				\end{align*}
+				\begin{align*}
 					\shortintertext{We want to minimize the cost, }
-					\argmin_{\delta_0, \delta_1} C(\delta_0, \delta_1) &= \argmin_{\delta_0, \delta_1} \int(\delta_0(X)f_1(X)dX \cdot \mathbb{P}(H_1) + \delta_1(X)f_0(X)dX \cdot \mathbb{P}(H_0)). \\
+					\argmin_{\delta_0, \delta_1} C(\delta_0, \delta_1) &= \argmin_{\delta_0, \delta_1} \int(\delta_0(x)f_1(x)dx \cdot \mathbb{P}(H_1) + \delta_1(x)f_0(x)dx \cdot \mathbb{P}(H_0)). \\
 					\\
-					\shortintertext{If $ \frac{f_1(x)}{f_0(x)} \ge \frac{\mathbb{P}(H_0)}{\mathbb{P}(H_1)} $, we take $ H_1 $; If $ \frac{f_1(x)}{f_0(x)} < \frac{\mathbb{P}(H_0)}{\mathbb{P}(H_1)} $, we choose $ H_0 $.}
+					\shortintertext{If $ \frac{f_1(x)}{f_0(x)} \ge \frac{\mathbb{P}(H_0)}{\mathbb{P}(H_1)} $, we choose $ H_1 $; If $ \frac{f_1(x)}{f_0(x)} < \frac{\mathbb{P}(H_0)}{\mathbb{P}(H_1)} $, we choose $ H_0 $.}
 					\shortintertext{That is, if $ \frac{f_w(x - s\alpha_i)}{f_w(x + s\alpha_i)} \ge 1 $, we choose $ H_1 $.}
-					\frac{f_w(x - s\alpha_i)}{f_w(x + s\alpha_i)} &= \prod_{i=1}^{N} \frac{\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x - s\alpha_i)^2}}{\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x + s\alpha_i)^2}} = \prod_{i=1}^{N} e^{\frac{4xs\alpha_i}{2\sigma^2}}\\
-					\shortintertext{The optimum decision mechanism is, if $ \prod_{i=1}^{N} e^{\frac{4xs\alpha_i}{2\sigma^2}} \ge 1 $, then choose $ H_1 $, otherwise choose $ H_0 $}
+					\frac{f_w(x - s\alpha_i)}{f_w(x + s\alpha_i)} &= \prod_{i=1}^{N} \frac{\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x_i - s\alpha_i)^2}}{\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x_i + s\alpha_i)^2}} = \prod_{i=1}^{N} e^{\frac{4x_i s\alpha_i}{2\sigma^2}}
 				\end{align*}
 %			\end{fleqn}
-			\item {The decision mechanism you found in a) depends on the unknown parameters $ s $ and $ \sigma_2 $ . Apply suitable transformations to find an equivalent mechanism (by taking for example the logarithm and removing unnecessary terms) which does not depend on these two unknown parameters.}
+			The optimum decision mechanism is, if $ \prod_{i=1}^{N} e^{\frac{4x_i s\alpha_i}{2\sigma^2}} \ge 1 $, then we choose $ H_1 $, otherwise we choose $ H_0 $. \\
+			
+			\item {The decision mechanism you found in a) depends on the unknown parameters $ s $ and $ \sigma_2 $ . Apply suitable transformations to find an equivalent mechanism (by taking for example the logarithm and removing unnecessary terms) which does not depend on these two unknown parameters.} \\
+			\\
+			From what we got in a), we know that the optimum decision mechanism is, if $ \prod_{i=1}^{N} e^{\frac{4x_i s\alpha_i}{2\sigma^2}} \ge 1 $, then we choose $ H_1 $, otherwise we choose $ H_0 $. \\
+			If we do logarithm on both sides, the results would not change.
+			\begin{align*}
+				& ln(\prod_{i=1}^{N} e^{\frac{4x_i s\alpha_i}{2\sigma^2}}) \ge ln(1) \\
+				& \implies \sum_{i=1}^{N} \frac{4x_i s\alpha_i}{2\sigma^2} \ge 0 \\
+				& \frac{4s}{2\sigma^2} \sum_{i=1}^{N} x_i \alpha_i \ge 0
+				\shortintertext{Because $ s > 0 $, $ \sigma^2 \ge 0 $, }
+				& \implies \sum_{i=1}^{N} x_i \alpha_i \ge 0
+			\end{align*}
+			The equivalent mechanism is: if $ \sum_{i=1}^{N} x_i \alpha_i \ge 0 $, we choose $ H_1 $, otherwise we choose $ H_0 $. \\
+			
 			\item {Explain what are the optimality properties of the mechanism you ended up with.}
 		\end{subquestion}
 	
