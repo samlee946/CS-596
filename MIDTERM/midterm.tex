@@ -57,8 +57,8 @@
 		\item {Let $ x_n , n = 1, . . . , N $ be random variables and consider the two scenarios:  
 			\begin{fleqn}[1cm]
 				\begin{align*}
-				&\mathsf{H}_0 : x_n = -s\alpha_i + w_n, \\
-				&\mathsf{H}_1 : x_n = s\alpha_i + w_n,
+				&\mathsf{H}_0 : x_n = -s\alpha_n + w_n, \\
+				&\mathsf{H}_1 : x_n = s\alpha_n + w_n,
 				\end{align*}
 			\end{fleqn}
 			 where $ w_n $ are independent and identically distributed Gaussian random variables with mean 0 and variance $ \sigma_2 $ where $ \sigma_2 $ is unknown, $ \alpha_1 , . . . , \alpha_N $ are deterministic and known and, finally $ s > 0 $ is a deterministic and unknown parameter. If the prior probabilities are $ P(\mathsf{H}_0 ) = P(\mathsf{H}_1 ) = 0.5 $ }
@@ -73,15 +73,25 @@
 					 \lbrace D_1, H_1 \rbrace \text{ with cost } C_{11}. \\
 					 \\
 					 \shortintertext{Then the average error(cost) will be:} 
-					 C(\delta_0, \delta_1) = C_{00}\mathbb{P}(D_0, H_0) + C_{01}\mathbb{P}(D_0, H_1) + C_{10}\mathbb{P}(D_1, H_0) + C_{11}\mathbb{P}(D_1, H_1). 
+					 C(\delta_0, \delta_1) = C_{00}\mathbb{P}(D_0\&_0) + C_{01}\mathbb{P}(D_0\&_1) + C_{10}\mathbb{P}(D_1\&_0) + C_{11}\mathbb{P}(D_1\&_1). 
 				\end{gather*}
 				\begin{align*}
 					\shortintertext{Let $ C_{00} = C_{11} = 0$, $ C_{01} = C_{10} = 1 $, then} 
-					C(\delta_0, \delta_1) &=  \mathbb{P}(D_0, H_1) + \mathbb{P}(D_1, H_0) \\
+					C(\delta_0, \delta_1) &=  \mathbb{P}(D_0 \& H_1) + \mathbb{P}(D_1 \& H_0) \\
 					&= \int\delta_0(X)f_1(X)dX \cdot \mathbb{P}(H_1) + \int\delta_1(X)f_0(X)dX \cdot \mathbb{P}(H_0). \\
 					\\
-					\shortintertext{Because $ \mathbb{P}(H_0) = \mathbb{P}(H_1) = 0.5$, }
-					\argmin_{\delta_0, \delta_1} C(\delta_0, \delta_1) &= 0.5\int\delta_0(X)f_1(X)dX + 0.5\int\delta_1(X)f_0(X)dX
+					\shortintertext{By definition, we can get:} 
+					F_0(x) &= \prod_{i=1}^{N}P(X_i < x) = \prod_{i=1}^{N}P(-s\alpha_i + \omega_i < x) = \prod_{i=1}^{N}P(\omega_i< x +s\alpha_i) = \prod_{i=1}^{N}F_{w_i}(x + s\alpha_i) ,\\
+					f_0(x) &= \prod_{i=1}^{N}f_{w_i}(x + s\alpha_i) .\\
+					F_1(x) &= \prod_{i=1}^{N}P(X_i < x) = \prod_{i=1}^{N}P(s\alpha_i + \omega_i < x) = \prod_{i=1}^{N}P(\omega_i< x -s\alpha_i) = \prod_{i=1}^{N}F_{w_i}(x - s\alpha_i) ,\\
+					f_1(x) &= \prod_{i=1}^{N}f_{w_i}(x - s\alpha_i) .\\
+					\shortintertext{We want to minimize the cost, }
+					\argmin_{\delta_0, \delta_1} C(\delta_0, \delta_1) &= \argmin_{\delta_0, \delta_1} \int(\delta_0(X)f_1(X)dX \cdot \mathbb{P}(H_1) + \delta_1(X)f_0(X)dX \cdot \mathbb{P}(H_0)). \\
+					\\
+					\shortintertext{If $ \frac{f_1(x)}{f_0(x)} \ge \frac{\mathbb{P}(H_0)}{\mathbb{P}(H_1)} $, we take $ H_1 $; If $ \frac{f_1(x)}{f_0(x)} < \frac{\mathbb{P}(H_0)}{\mathbb{P}(H_1)} $, we choose $ H_0 $.}
+					\shortintertext{That is, if $ \frac{f_w(x - s\alpha_i)}{f_w(x + s\alpha_i)} \ge 1 $, we choose $ H_1 $.}
+					\frac{f_w(x - s\alpha_i)}{f_w(x + s\alpha_i)} &= \prod_{i=1}^{N} \frac{\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x - s\alpha_i)^2}}{\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x + s\alpha_i)^2}} = \prod_{i=1}^{N} e^{\frac{4xs\alpha_i}{2\sigma^2}}\\
+					\shortintertext{The optimum decision mechanism is, if $ \prod_{i=1}^{N} e^{\frac{4xs\alpha_i}{2\sigma^2}} \ge 1 $, then choose $ H_1 $, otherwise choose $ H_0 $}
 				\end{align*}
 %			\end{fleqn}
 			\item {The decision mechanism you found in a) depends on the unknown parameters $ s $ and $ \sigma_2 $ . Apply suitable transformations to find an equivalent mechanism (by taking for example the logarithm and removing unnecessary terms) which does not depend on these two unknown parameters.}
