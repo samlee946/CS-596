@@ -1,0 +1,89 @@
+\documentclass[letter, 12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{eqparbox}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{mathtools,amsthm,amssymb, nccmath}
+
+\author{Shengjie Li}
+\title{Midterm Exam}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\lhead{Shengjie Li \\ RUID: 188008047}
+\cfoot{\thepage} 
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headwidth}{\textwidth}
+\renewcommand\algorithmiccomment[1]{%
+	\hfill\#\ \eqparbox{COMMENT}{#1}%
+}
+\newlist{subquestion}{enumerate}{1}
+\setlist[subquestion, 1]{label = \alph*)}
+
+\setlength\parindent{0pt}
+
+% margin adjustment
+\addtolength{\textwidth}{1in}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+\setlength\parindent{0cm}
+
+\begin{document}
+	\centerline{Midterm Exam}
+	\begin{enumerate}[wide = 0pt, label = \textbf{Problem \arabic*:}]
+		\item {Let $ x_0 $ be deterministic and $ x_1 , \dots , x_N $ denote random variables satisfying (an autoregressive model of order 1) $ x_n = \alpha x_{n−1} + w_n $ , $ n = 1, . . . , N $, where $ w_1 , . . . , w_N $ are independent and identically distributed Gaussian random variables with mean 0 and variance 1 while $ \alpha $ denotes an unknown parameter. }
+		\begin{subquestion}
+			\item {Find the joint density of $ x_1 , . . . , x_N $ given $ \alpha $ (remember x 0 is deterministic).}
+			\item {Compute the maximum likelihood estimate of $ \alpha $ when you are given $ x_0 $ and a realization of $ x_1 , . . . , x_N. $}
+		\end{subquestion}
+		\item {Let $ x_n , n = 1, . . . , N $ be random variables and consider the two scenarios:  
+			\begin{fleqn}[1cm]
+				\begin{align*}
+				&\mathsf{H}_0 : x_n = −s\alpha_i + w_n, \\
+				&\mathsf{H}_1 : x = s\alpha_i + w_n,
+				\end{align*}
+			\end{fleqn}
+			 where $ w_n $ are independent and identically distributed Gaussian random variables with mean 0 and variance $ \sigma_2 $ where $ \sigma_2 $ is unknown, $ \alpha_1 , . . . , \alpha_N $ are deterministic and known and, finally $ s > 0 $ is a deterministic and unknown parameter. If the prior probabilities are $ P(\mathsf{H}_0 ) = P(\mathsf{H}_1 ) = 0.5 $ }
+		\begin{subquestion}
+			\item {Find the optimum decision mechanism that decides between the two scenarios and minimizes the probability of making an error. Start by assuming that all unknown parameters are magically known.}
+			\item {The decision mechanism you found in a) depends on the unknown parameters $ s $ and $ \sigma_2 $ . Apply suitable transformations to find an equivalent mechanism (by taking for example the logarithm and removing unnecessary terms) which does not depend on these two unknown parameters.}
+			\item {Explain what are the optimality properties of the mechanism you ended up with.}
+		\end{subquestion}
+	
+		\item {Consider a random vector X for which we have three possible scenarios
+		\begin{fleqn}[1cm]
+			\begin{align*}
+			&\mathsf{H}_0 : X \approx f_0 (X),\\
+			&\mathsf{H}_1 : X \approx f_1 (X),\\
+			&\mathsf{H}_0 : X \approx f_2 (X),
+			\end{align*}
+		\end{fleqn}
+		with all the prior probabilities assumed equal. Find the optimum decision mechanism that minimizes the probability of making an error. Consider now the two likelihood ratios $ \mathsf{L}_1 = \frac{f_1(X)}{f_0(X)} $ and $ \mathsf{L}_2 = \frac{f_2(X)}{f_0(X)} $. For every realization $ X $ you can compute the two likelihood ratios which are in fact all you need to make your
+		decision. }
+		\begin{subquestion}
+			\item {In the 2D space with axes $ \mathsf{L}_1, \mathsf{L}_2 $ identify the regions for which you decide in favor of each of the three scenarios $ \mathsf{H}_0 , \mathsf{H}_1 , \mathsf{H}_2 $ .}
+			\item {What happens at the boundaries between two regions? What happens at the single point which belongs to the boundary of all three regions?}
+		\end{subquestion}
+	
+		\item {As discussed in the class the space of all random variables constitutes a vector space. We can also define an inner product (also mentioned in class) between two random vectors $ x, y $ 
+			\begin{align*}
+				<x, y>= E[xy].
+			\end{align*} Consider now the following random variables $ x, z, w $. We are interested in linear combinations of the form $ \hat{x}= az + bw $ where a, b are real deterministic quantities.}
+		\begin{subquestion}
+			\item {By using the orthogonality principle find the $ \hat{x}_\ast $ (equivalently the optimum coefficients $ a_\ast , b _\ast $ ) that is closest to x in the sense of the norm induced by the inner product.}
+			\item {Compute the optimum (minimum) distance and its optimum approximation $ \hat{x}_\ast $ in terms of $ E[xz], E[xw], E[z^2 ], E[zw], E[w^2] $.}
+			\item {Explain what is the physical meaning of this approximation.}
+		\end{subquestion}
+	\end{enumerate}
+\end{document}
