@@ -74,6 +74,19 @@
 			\end{align*} 
 		
 			\item {Compute the maximum likelihood estimate of $ \alpha $ when you are given $ x_0 $ and a realization of $ x_1 , \dots , x_N. $}
+			\begin{align*}
+				\shortintertext{From a) we know that}
+				\mathcal{L}(\alpha) &= \prod_{i = 1}^{N}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(x_i - \alpha x_{i-1})^2}.
+				\shortintertext{Let $ l(\alpha) = \ln(\mathcal{L}(\alpha)) $,}
+				l(\alpha) &= -\frac{N}{2}\ln(2\pi) - \sum_{i = 1}^{N} \frac{1}{2}(x_i - \alpha x_{i-1})^2 \\
+				l'(\alpha) &= -\sum_{i = 1}^{N} (x_i - \alpha x_{i-1})(-x_{i-1}) \\
+				&= \sum_{i = 1}^{N} (x_i x_{i-1}) - \sum_{i = 1}^{N} (\alpha x_{i-1}^2) \\
+				&= \sum_{i = 1}^{N} (x_i x_{i-1}) - \alpha \sum_{i = 1}^{N} (x_{i-1}^2) \\
+				l''(\alpha) &= - \sum_{i = 1}^{N} (x_{i-1}^2)
+				\shortintertext{Because $ l''(\alpha) = - \sum_{i = 1}^{N} (x_{i-1}^2 < 0$, $ l(\alpha) $ is concave.}
+				\shortintertext{Let $ l'(\alpha) = 0$, then we can get the maximum likelihood estimate of $ \alpha $:}
+				\alpha &= \frac{\sum_{i = 1}^{N} (x_i x_{i-1})}{ \sum_{i = 1}^{N} (x_{i-1}^2)}. \\
+			\end{align*}
 		\end{subquestion}
 		\item {Let $ x_n , n = 1, \dots , N $ be random variables and consider the two scenarios:  
 			\begin{fleqn}[1cm]
