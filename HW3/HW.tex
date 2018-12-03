@@ -116,6 +116,20 @@
 				\label{fig:fig-gaussian-lambda}
 			\end{figure}
 			\item {\textbf{Solution:} }
+			\par{When using the simpler kernel function \[K(X, Y) = (1 + x_1 y_1 + x_2 y_2)^2 ,\] we can still use the theorem.}
+			\par{We can actually use the same $ g(x) $, so that if given a new point $ X_{new} $, if $ g(X_{new}) > 0 $, we call it a star. Otherwise we call it a circle.}
+			\par{The results for different values of $ \lambda $ are shown in Fig \ref{fig:simpler-kernel}.}
+			\par{Some examples of functions $ \phi(X) $ are:}
+			\begin{itemize}
+				\item {\[g(x) = C_0 + x_1 y_1 + x_2 y_2 + \dots + x^2 y^2 \]}
+				\item {\[g(x) = C_0 + C_1 x_1 + C_1 x_2 + C_2 x_1 x_2 + d_1 x_1^2 + d_2 x_2^2\]}
+			\end{itemize}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{figs/simple-kernel.png}
+				\caption{The boundary under different values of $ \lambda $.}
+				\label{fig:simpler-kernel}
+			\end{figure}
 		\end{subquestion}
 	\end{enumerate}
 \end{document}
