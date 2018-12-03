@@ -56,8 +56,8 @@
 				\label{fig:histo}
 			\end{figure}
 			\par{According to the Law of Large Numbers, $ \mathbb{E}[K_h(X-x)] \approx \frac{K_h(X - x_1) + K_h(X - x_2) + \dots + K_h(X - x_n)}{n} \approx f(x) $.}
-			\par{When we approximate the pdf using the Gaussian kernel, \[ K_h(X) = \frac{e^{-\frac{1}{2h}x^2}}{\sqrt{2 \pi h}}. \] }
-			\par{The results are shown in Fig \ref{fig:pdf-gaussian}.}
+			\par{When we approximate the pdf using the Gaussian kernel \[ K_h(X) = \frac{e^{-\frac{1}{2h}x^2}}{\sqrt{2 \pi h}}, \] }
+			\par{the results are shown in Fig \ref{fig:pdf-gaussian}.}
 			\par{We can see from Fig \ref{fig:pdf-gaussian} that when the $ h $ is large, the model underfit the pdf, which is not close enough. As the $ h $ is decreasing, the support of the random variable becomes closer to $ [0, 1] $, and the approximation of pdf becomes more zigzag around 1, starts to overfit.}
 			\begin{figure}[H]
 				\centering
@@ -67,8 +67,8 @@
 			\end{figure}
 		
 			\item {\textbf{Solution:} }
-			\par{When we approximate the pdf using the Laplacian kernel, \[ K_h(X) = \frac{e^{-\frac{1}{2h}x^2}}{\sqrt{2 \pi h}}. \] }
-			\par{The results are shown in Fig \ref{fig:pdf-laplacian}.}
+			\par{When we approximate the pdf using the Laplacian kernel \[ K_h(X) = \frac{e^{-\frac{1}{2h}x^2}}{\sqrt{2 \pi h}}, \] }
+			\par{the results are shown in Fig \ref{fig:pdf-laplacian}.}
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=\textwidth]{figs/pdf-laplacian.png}
@@ -96,7 +96,7 @@
 			\par{Denote the original class of the input data by $ b $, then the minimization we are trying to solve becomes: 
 			\[ min(||b - K \alpha||^2 + \lambda \alpha ^T K \alpha) .\]}
 			\par{We let the partial derivative equal to 0, we get $ \alpha = (\lambda I + K)^{-1}b .$}
-			\par{We hereby successfully turned the question. }
+			\par{We hereby successfully transformed the question. }
 			\item {\textbf{Solution:} }
 			\par{Now we can just put the new point $ X_{new} $ into $ g(x) = \alpha_1 K(x, x_i) + \dots + \alpha_m K(x, x_m) + \alpha_1 K(x, {x'}_i) + \dots + \alpha_{m'} K(x, {x'}_{m'}) $. }
 			\par{If $ g(X_{new}) > 0 $, we call it a star. Otherwise we call it a circle.}
