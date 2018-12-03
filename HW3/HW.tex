@@ -29,6 +29,8 @@
 }
 \newlist{subquestion}{enumerate}{1}
 \setlist[subquestion, 1]{label = \alph*)}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \setlength\parindent{0pt}
 
@@ -75,5 +77,44 @@
 			\end{figure}
 		\end{subquestion}
 		
+		\item{\ }
+		\begin{subquestion}
+			\item {\textbf{Solution:} }
+			\par{By solving this minimization problem:  \[\min_{\phi}\{\sum_{X_i \in \texttt{stars}}(1 - \phi(X_i))^2 + \sum_{X_j \in \texttt{circles}}(1 + \phi(X_j))^2 + \lambda || \phi(X) ||^2\}, \] the idea is to try to minimize the loss.}
+			\par{Define $ V $, the space of functions that map $ \mathbb{R}^2 $ to $ \mathbb{R} $.}
+			\par{Define $ \phi(X):z \rightarrow K(x, z) $, $ z \in \mathbb{R}^2 $, $ K(x, z) \in V $.}
+			\par{In the vector space, $ g(x) = \sum_{i = 1}^{m} \alpha _i K(x, z_i) $, $ h(x) = \sum_{i = 1}^{m'} \beta _i K(x, {z'}_i) $.}
+			\par{Define the inner product:}
+			\[ <g(x), h(x)> = \sum_{i = 1}^{m}\sum_{j = 1}^{m'} \alpha _i \beta _j K(z_i, {z'}_j) .\]
+			\par{Then we are trying to solving \[\min_{g(x) \in V}\{\sum_{X_i \in \texttt{stars}}(1 - g(X_i))^2 + \sum_{X_j \in \texttt{circles}}(-1 - g(X_j))^2 + \lambda || g(X) ||^2\}, \text{where $ g(X) = <g(X), g(X)> $}.\]}
+			\par{According to the theorem, the best choice would be $ m = N, z_i = x_i $.}
+			\par{Thus, $ g(x) = \sum_{i = 1}^{m} \alpha _i K(x, x_i) + \sum_{i = 1}^{m'} \beta _i K(x, {x'}_i) $, where $ x_i $s are data of stars, $ x_i' $s are data of circles.}
+			\par{If we concatenate the input data, the inner product would be:
+			\[ <g(x), g(x)> = \sum_{i = 1}^{m}\sum_{j = 1}^{m'} \alpha _i \alpha _j K(x_i, {x'}_j) = \alpha ^T K \alpha,\]}
+			\par{and $ g(x) $ would be: $ g(x) = K \alpha .$ $ K $ is positive definite and symmetric.}
+			\par{Denote the original class of the input data by $ b $, then the minimization we are trying to solve becomes: 
+			\[ min(||b - K \alpha||^2 + \lambda \alpha ^T K \alpha) .\]}
+			\par{We let the partial derivative equal to 0, we get $ \alpha = (\lambda I + K)^{-1}b .$}
+			\par{We hereby successfully turned the question. }
+			\item {\textbf{Solution:} }
+			\par{Now we can just put the new point $ X_{new} $ into $ g(x) = \alpha_1 K(x, x_i) + \dots + \alpha_m K(x, x_m) + \alpha_1 K(x, {x'}_i) + \dots + \alpha_{m'} K(x, {x'}_{m'}) $. }
+			\par{If $ g(X_{new}) > 0 $, we call it a star. Otherwise we call it a circle.}
+			\item {\textbf{Solution:} }
+			\par{The boundary for the two classes would be lying on where $ g(x) = 0 $. The results are shown in Fig \ref{fig:fig-gaussian-10} and Fig \ref{fig:fig-gaussian-lambda}.}
+			\item {\textbf{Solution:} }
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{figs/fig-gaussian-10.png}
+				\caption{The boundary under different values of $ h $.}
+				\label{fig:fig-gaussian-10}
+			\end{figure}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{figs/fig-gaussian-lambda.png}
+				\caption{The boundary under different values of $ \lambda $.}
+				\label{fig:fig-gaussian-lambda}
+			\end{figure}
+			\item {\textbf{Solution:} }
+		\end{subquestion}
 	\end{enumerate}
 \end{document}
